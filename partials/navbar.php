@@ -22,7 +22,7 @@
                     <a href="dashboard" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="employees" class="nav-link">
                         Employees
                     </a>
                 </li>
