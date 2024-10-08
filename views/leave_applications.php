@@ -78,36 +78,37 @@ require_once('../partials/head.php');
         <!-- Navbar -->
         <?php require_once('../partials/navbar.php'); ?>
         <!-- /.navbar -->
-        <?php if ($_SESSION['user_access_level'] == 'Admin') { ?> <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 class="m-0 text-dark"><?php echo $_GET['category']; ?> Leave Applications</h1>
-                            </div><!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Leave Applications</li>
-                                </ol>
-                            </div><!-- /.col -->
-                            <hr>
-                        </div><!-- /.row -->
-                    </div><!-- /.container-fluid -->
-                </div>
-                <!-- /.content-header -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark"><?php echo $_GET['category']; ?> Leave Applications</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Leave Applications</li>
+                            </ol>
+                        </div><!-- /.col -->
+                        <hr>
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
 
 
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card card-primary card-outline">
-                                    <div class="card-body">
-                                        <div class="row">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <?php if ($_SESSION['user_access_level'] == 'Admin') { ?>
                                             <div class="col-md-12">
                                                 <?php if ($_GET['category'] == 'Pending') { ?>
                                                     <table class="table table-bordered text-truncate data_table" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -282,219 +283,176 @@ require_once('../partials/head.php');
                                                     </table>
                                                 <?php } ?>
                                             </div>
-                                        </div>
-                                        <!-- /.row -->
-                                    </div>
-
-                                </div>
-                                <!-- /.card -->
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!--/. container-fluid -->
-                </section>
-                <!-- /.content -->
-            </div>
-            <!-- /.content-wrapper -->
-        <?php } else { ?>
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 class="m-0 text-dark"><?php echo $_GET['category']; ?> Leave Applications</h1>
-                            </div><!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                                    <li class="breadcrumb-item active"><?php echo $_GET['category']; ?> Leave Applications</li>
-                                </ol>
-                            </div><!-- /.col -->
-                            <hr>
-                        </div><!-- /.row -->
-                    </div><!-- /.container-fluid -->
-                </div>
-                <!-- /.content-header -->
-
-
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card card-primary card-outline">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <?php if ($_GET['category'] == 'Pending') { ?>
-                                                <table class="table table-bordered text-truncate data_table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Sno</th>
-                                                            <th>Names</th>
-                                                            <th>Email</th>
-                                                            <th>Contacts</th>
-                                                            <th>Start Date</th>
-                                                            <th>End Date</th>
-                                                            <th>Manage</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $users_sql = mysqli_query(
-                                                            $mysqli,
-                                                            "SELECT * FROM users u
+                                        <?php } else { ?>
+                                            <div class="col-md-12">
+                                                <?php if ($_GET['category'] == 'Pending') { ?>
+                                                    <table class="table table-bordered text-truncate data_table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sno</th>
+                                                                <th>Names</th>
+                                                                <th>Email</th>
+                                                                <th>Contacts</th>
+                                                                <th>Start Date</th>
+                                                                <th>End Date</th>
+                                                                <th>Manage</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $users_sql = mysqli_query(
+                                                                $mysqli,
+                                                                "SELECT * FROM users u
                                                                 INNER JOIN leave_applications la 
                                                                 ON la.application_user_id = u.user_id
                                                                 WHERE application_status = 'Pending Approval'
                                                                 AND u.user_id = '{$_SESSION['user_id']}'
                                                                 "
-                                                        );
-                                                        $cnt = 1;
-                                                        if (mysqli_num_rows($users_sql) > 0) {
-                                                            while ($users = mysqli_fetch_array($users_sql)) {
-                                                        ?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <?php echo $cnt; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['user_names']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['user_email']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['user_contacts']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['application_start_date']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['application_end_date']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <a data-toggle="modal" href="#update_<?php echo $users['applicaton_id']; ?>" class="badge  badge-pill badge-primary"><em class="fas fa-user-edit"></em> Edit</a>
-                                                                        <a data-toggle="modal" href="#delete_<?php echo $users['applicaton_id']; ?>" class="badge  badge-pill badge-danger"><em class="fas fa-trash"></em> Delete</a>
-                                                                    </td>
-                                                                </tr>
-                                                        <?php
-                                                                $cnt = $cnt + 1;
-                                                                include('../modals/applications.php');
-                                                            }
-                                                        } ?>
-                                                    </tbody>
-                                                </table>
-                                            <?php } else if ($_GET['category'] == 'Approved') { ?>
-                                                <table class="table table-bordered text-truncate data_table" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Sno</th>
-                                                            <th>Names</th>
-                                                            <th>Email</th>
-                                                            <th>Contacts</th>
-                                                            <th>Start Date</th>
-                                                            <th>End Date</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $users_sql = mysqli_query(
-                                                            $mysqli,
-                                                            "SELECT * FROM users u
+                                                            );
+                                                            $cnt = 1;
+                                                            if (mysqli_num_rows($users_sql) > 0) {
+                                                                while ($users = mysqli_fetch_array($users_sql)) {
+                                                            ?>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <?php echo $cnt; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['user_names']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['user_email']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['user_contacts']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['application_start_date']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['application_end_date']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a data-toggle="modal" href="#update_<?php echo $users['applicaton_id']; ?>" class="badge  badge-pill badge-primary"><em class="fas fa-user-edit"></em> Edit</a>
+                                                                            <a data-toggle="modal" href="#delete_<?php echo $users['applicaton_id']; ?>" class="badge  badge-pill badge-danger"><em class="fas fa-trash"></em> Delete</a>
+                                                                        </td>
+                                                                    </tr>
+                                                            <?php
+                                                                    $cnt = $cnt + 1;
+                                                                    include('../modals/applications.php');
+                                                                }
+                                                            } ?>
+                                                        </tbody>
+                                                    </table>
+                                                <?php } else if ($_GET['category'] == 'Approved') { ?>
+                                                    <table class="table table-bordered text-truncate data_table" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sno</th>
+                                                                <th>Names</th>
+                                                                <th>Email</th>
+                                                                <th>Contacts</th>
+                                                                <th>Start Date</th>
+                                                                <th>End Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $users_sql = mysqli_query(
+                                                                $mysqli,
+                                                                "SELECT * FROM users u
                                                                 INNER JOIN leave_applications la 
                                                                 ON la.application_user_id = u.user_id
                                                                 WHERE application_status = 'Approved'
                                                                  AND u.user_id = '{$_SESSION['user_id']}'
                                                                 "
-                                                        );
-                                                        $cnt = 1;
-                                                        if (mysqli_num_rows($users_sql) > 0) {
-                                                            while ($users = mysqli_fetch_array($users_sql)) {
-                                                        ?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <?php echo $cnt; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['user_names']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['user_email']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['user_contacts']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['application_start_date']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['application_end_date']; ?>
-                                                                    </td>
-                                                                </tr>
-                                                        <?php
-                                                                $cnt = $cnt + 1;
-                                                            }
-                                                        } ?>
-                                                    </tbody>
-                                                </table>
-                                            <?php } else { ?>
-                                                <table class="table table-bordered text-truncate data_table" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Sno</th>
-                                                            <th>Names</th>
-                                                            <th>Email</th>
-                                                            <th>Contacts</th>
-                                                            <th>Start Date</th>
-                                                            <th>End Date</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $users_sql = mysqli_query(
-                                                            $mysqli,
-                                                            "SELECT * FROM users u
+                                                            );
+                                                            $cnt = 1;
+                                                            if (mysqli_num_rows($users_sql) > 0) {
+                                                                while ($users = mysqli_fetch_array($users_sql)) {
+                                                            ?>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <?php echo $cnt; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['user_names']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['user_email']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['user_contacts']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['application_start_date']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['application_end_date']; ?>
+                                                                        </td>
+                                                                    </tr>
+                                                            <?php
+                                                                    $cnt = $cnt + 1;
+                                                                }
+                                                            } ?>
+                                                        </tbody>
+                                                    </table>
+                                                <?php } else { ?>
+                                                    <table class="table table-bordered text-truncate data_table" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sno</th>
+                                                                <th>Names</th>
+                                                                <th>Email</th>
+                                                                <th>Contacts</th>
+                                                                <th>Start Date</th>
+                                                                <th>End Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $users_sql = mysqli_query(
+                                                                $mysqli,
+                                                                "SELECT * FROM users u
                                                                 INNER JOIN leave_applications la 
                                                                 ON la.application_user_id = u.user_id
                                                                 WHERE application_status = 'Declined'
                                                                  AND u.user_id = '{$_SESSION['user_id']}'
                                                                 "
-                                                        );
-                                                        $cnt = 1;
-                                                        if (mysqli_num_rows($users_sql) > 0) {
-                                                            while ($users = mysqli_fetch_array($users_sql)) {
-                                                        ?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <?php echo $cnt; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['user_names']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['user_email']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['user_contacts']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['application_start_date']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $users['application_end_date']; ?>
-                                                                    </td>
-                                                                </tr>
-                                                        <?php
-                                                                $cnt = $cnt + 1;
-                                                            }
-                                                        } ?>
-                                                    </tbody>
-                                                </table>
-                                            <?php } ?>
-                                        </div>
+                                                            );
+                                                            $cnt = 1;
+                                                            if (mysqli_num_rows($users_sql) > 0) {
+                                                                while ($users = mysqli_fetch_array($users_sql)) {
+                                                            ?>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <?php echo $cnt; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['user_names']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['user_email']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['user_contacts']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['application_start_date']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $users['application_end_date']; ?>
+                                                                        </td>
+                                                                    </tr>
+                                                            <?php
+                                                                    $cnt = $cnt + 1;
+                                                                }
+                                                            } ?>
+                                                        </tbody>
+                                                    </table>
+                                                <?php } ?>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                     <!-- /.row -->
                                 </div>
@@ -505,20 +463,20 @@ require_once('../partials/head.php');
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
-            </div>
-            <!--/. container-fluid -->
+                </div>
+                <!--/. container-fluid -->
             </section>
             <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
     </div>
-<?php  } ?>
 
-<!-- Main Footer -->
-<?php require_once('../partials/footer.php'); ?>
-</div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
-<?php require_once('../partials/scripts.php'); ?>
+    <!-- Main Footer -->
+    <?php require_once('../partials/footer.php'); ?>
+
+    <!-- REQUIRED SCRIPTS -->
+    <?php require_once('../partials/scripts.php'); ?>
 </body>
 
 
