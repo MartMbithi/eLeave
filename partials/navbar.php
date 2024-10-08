@@ -51,7 +51,7 @@
                     <a href="leave_apply" class="nav-link">Apply Leave</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Leave Applications</a>
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">My Applications</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                         <li><a href="leave_applications?category=Pending" class="dropdown-item">Pending Approval </a></li>
                         <li><a href="leave_applications?category=Approved" class="dropdown-item">Approved </a></li>
