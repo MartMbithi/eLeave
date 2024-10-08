@@ -65,15 +65,68 @@
  *
  */
 
+/* Apply Leave */
+if (isset($_POST['Apply_Leave'])) {
+    $application_user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
+    $application_start_date = mysqli_real_escape_string($mysqli, $_POST['application_start_date']);
+    $application_end_date = mysqli_real_escape_string($mysqli, $_POST['application_end_date']);
 
-/* Register Your Application Logic Here */
-
-if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-    $uri = 'https://';
-} else {
-    $uri = 'http://';
+    /* Persist */
+    if (mysqli_query(
+        $mysqli,
+        "INSERT INTO leave_applications(application_user_id, application_start_date, application_end_date) 
+        VALUES('$application_user_id', '$application_start_date', '$application_end_date')"
+    )) {
+        $success = "Leave Application Submitted Successfully";
+    } else {
+        $error = "Failed to Submit Leave Application";
+    }
 }
-$uri .= $_SERVER['HTTP_HOST'];
-/* Redirect To Index Under Views */
-header('Location: ' . $uri . '/eLeave/views/');
-exit;
+
+
+/* Update Application */
+if (isset($_POST['Update_Application'])) {
+    $applicaton_id = mysqli_real_escape_string($mysqli, $_POST['application_id']);
+    $application_start_date = mysqli_real_escape_string($mysqli, $_POST['application_start_date']);
+    $application_end_date = mysqli_real_escape_string($mysqli, $_POST['application_end_date']);
+
+    /* Persist */
+    if (mysqli_query(
+        $mysqli,
+        "UPDATE leave_applications SET application_start_date = '$application_start_date', application_end_date = '$application_end_date' WHERE application_id = '$applicaton_id'"
+    )) {
+        $success = "Leave Application Updated Successfully";
+    } else {
+        $error = "Failed to Update Leave Application";
+    }
+}
+
+
+/* Delete Application */
+if (isset($_POST['Delete_Application'])) {
+    $application_id = mysqli_real_escape_string($mysqli, $_POST['application_id']);
+
+    /* Persist */
+    if (mysqli_query($mysqli, "DELETE FROM leave_applications WHERE application_id = '$application_id'")) {
+        $success = "Leave Application Deleted Successfully";
+    } else {
+        $error = "Failed to Delete Leave Application";
+    }
+}
+
+
+/* Change Application Status */
+if (isset($_POST['Change_Application_Status'])) {
+    $application_id = mysqli_real_escape_string($mysqli, $_POST['application_id']);
+    $application_status = mysqli_real_escape_string($mysqli, $_POST['application_status']);
+
+    /* Persist */
+    if (mysqli_query(
+        $mysqli,
+        "UPDATE leave_applications SET application_status = '$application_status' WHERE application_id = '$application_id'"
+    )) {
+        $success = "Leave Application $application_status Successfully";
+    } else {
+        $error = "Failed to Change Leave Application Status";
+    }
+}
