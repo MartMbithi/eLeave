@@ -268,7 +268,9 @@ require_once('../partials/head.php');
                                                                 </td>
                                                                 <td>
                                                                     <a data-toggle="modal" href="#update_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-warning"><em class="fas fa-user-edit"></em> Edit</a>
-                                                                    <a data-toggle="modal" href="#password_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-danger"><em class="fas fa-user-lock"></em> Change password</a>
+                                                                    <a data-toggle="modal" href="#password_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-warning"><em class="fas fa-user-lock"></em> Change password</a>
+                                                                    <a data-toggle="modal" href="#delete_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-danger"><em class="fas fa-trash"></em> Delete</a>
+
                                                                 </td>
                                                             </tr>
                                                     <?php

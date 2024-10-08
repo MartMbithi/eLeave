@@ -110,7 +110,7 @@
                             <label>New Password</label>
                             <div class="input-group mb-3">
                                 <input type="hidden" name="user_id" value="<?php echo $users['user_id']; ?>" required class="form-control">
-                                <input type="hidden" name="new_password" required class="form-control">
+                                <input type="password" name="new_password" required class="form-control">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="text-primary fas fa-lock"></span>
@@ -127,6 +127,22 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete_<?php echo $users['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form method="POST">
+                <div class="modal-body text-center text-dark">
+                    <h4>Heads Up!</h4>
+                    <p>You are about to delete this record</p>
+                    <input type="hidden" name="user_id" value="<?php echo $users['user_id']; ?>">
+                    <button type="button" class="text-center btn btn-success" data-dismiss="modal">No, Dismiss</button>
+                    <input type="submit" name="Delete_User" value="Yes, Delete" class="text-center btn btn-danger">
+                </div>
+            </form>
         </div>
     </div>
 </div>
