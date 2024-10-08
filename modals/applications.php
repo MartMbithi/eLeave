@@ -24,7 +24,7 @@
                         <div class="form-group col-md-6">
                             <label>End date</label>
                             <div class="input-group mb-3">
-                                <input type="hidden" name="application_id" value="<?php echo $users['application_id']; ?>" required class="form-control">
+                                <input type="hidden" name="applicaton_id" value="<?php echo $users['applicaton_id']; ?>" required class="form-control">
                                 <input type="date" name="application_end_date" value="<?php echo $users['application_start_date']; ?>" required class="form-control">
                                 <div class="input-group-append">
                                     <div class="input-group-text">

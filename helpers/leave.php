@@ -86,14 +86,14 @@ if (isset($_POST['Apply_Leave'])) {
 
 /* Update Application */
 if (isset($_POST['Update_Application'])) {
-    $applicaton_id = mysqli_real_escape_string($mysqli, $_POST['application_id']);
+    $applicaton_id = mysqli_real_escape_string($mysqli, $_POST['applicaton_id']);
     $application_start_date = mysqli_real_escape_string($mysqli, $_POST['application_start_date']);
     $application_end_date = mysqli_real_escape_string($mysqli, $_POST['application_end_date']);
 
     /* Persist */
     if (mysqli_query(
         $mysqli,
-        "UPDATE leave_applications SET application_start_date = '$application_start_date', application_end_date = '$application_end_date' WHERE application_id = '$applicaton_id'"
+        "UPDATE leave_applications SET application_start_date = '$application_start_date', application_end_date = '$application_end_date' WHERE applicaton_id = '$applicaton_id'"
     )) {
         $success = "Leave Application Updated Successfully";
     } else {
@@ -104,10 +104,10 @@ if (isset($_POST['Update_Application'])) {
 
 /* Delete Application */
 if (isset($_POST['Delete_Application'])) {
-    $application_id = mysqli_real_escape_string($mysqli, $_POST['application_id']);
+    $applicaton_id = mysqli_real_escape_string($mysqli, $_POST['applicaton_id']);
 
     /* Persist */
-    if (mysqli_query($mysqli, "DELETE FROM leave_applications WHERE application_id = '$application_id'")) {
+    if (mysqli_query($mysqli, "DELETE FROM leave_applications WHERE applicaton_id = '$applicaton_id'")) {
         $success = "Leave Application Deleted Successfully";
     } else {
         $error = "Failed to Delete Leave Application";
@@ -117,13 +117,13 @@ if (isset($_POST['Delete_Application'])) {
 
 /* Change Application Status */
 if (isset($_POST['Change_Application_Status'])) {
-    $application_id = mysqli_real_escape_string($mysqli, $_POST['application_id']);
+    $applicaton_id = mysqli_real_escape_string($mysqli, $_POST['applicaton_id']);
     $application_status = mysqli_real_escape_string($mysqli, $_POST['application_status']);
 
     /* Persist */
     if (mysqli_query(
         $mysqli,
-        "UPDATE leave_applications SET application_status = '$application_status' WHERE application_id = '$application_id'"
+        "UPDATE leave_applications SET application_status = '$application_status' WHERE applicaton_id = '$applicaton_id'"
     )) {
         $success = "Leave Application $application_status Successfully";
     } else {
