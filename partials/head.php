@@ -14,7 +14,7 @@
     <!-- favicon -->
     <link href="../public/img/favicon.ico" rel="shortcut icon">
     <!--favicon-->
-    <title>Government of Makueni County - eRegistration System System</title>
+    <title>Simplifying Leave Applications | eLeave</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../public/plugins/fontawesome-free/css/all.min.css">
@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="../public/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../public/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <!-- Full Calendar -->
-    
+
     <?php
     /* Alert Sesion Via Alerts */
     if (isset($_SESSION['success'])) {
