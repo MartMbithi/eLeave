@@ -1,1 +1,1 @@
-Register your public files here
+Register public assets

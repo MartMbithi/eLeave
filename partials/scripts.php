@@ -27,7 +27,8 @@
 <script src="../public/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../public/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <!-- ChartJS -->
-<script src="../public/plugins/chart.js/Chart.min.js"></script>
+<script src="../public/js/custom.js"></script>
+
 <!-- Select  -->
 
 <!-- Load alerts -->
