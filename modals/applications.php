@@ -45,3 +45,53 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="approve_<?php echo $users['applicaton_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form method="POST">
+                <div class="modal-body text-center text-dark">
+                    <h4>Heads Up!</h4>
+                    <p>You are about to approve this record</p>
+                    <input type="hidden" name="applicaton_id" value="<?php echo $users['applicaton_id']; ?>">
+                    <input type="hidden" name="application_status" value="Approved">
+                    <button type="button" class="text-center btn btn-danger" data-dismiss="modal">No, Dismiss</button>
+                    <input type="submit" name="Change_Application_Status" value="Yes, Approve" class="text-center btn btn-success">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="decline_<?php echo $users['applicaton_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form method="POST">
+                <div class="modal-body text-center text-dark">
+                    <h4>Heads Up!</h4>
+                    <p>You are about to decline this record</p>
+                    <input type="hidden" name="applicaton_id" value="<?php echo $users['applicaton_id']; ?>">
+                    <input type="hidden" name="application_status" value="Declined">
+                    <button type="button" class="text-center btn btn-success" data-dismiss="modal">No, Dismiss</button>
+                    <input type="submit" name="Change_Application_Status" value="Yes, Decline" class="text-center btn btn-danger">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete_<?php echo $users['applicaton_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form method="POST">
+                <div class="modal-body text-center text-dark">
+                    <h4>Heads Up!</h4>
+                    <p>You are about to delete this record</p>
+                    <input type="hidden" name="applicaton_id" value="<?php echo $users['applicaton_id']; ?>">
+                    <button type="button" class="text-center btn btn-success" data-dismiss="modal">No, Dismiss</button>
+                    <input type="submit" name="Delete_Application" value="Yes, Delete" class="text-center btn btn-danger">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

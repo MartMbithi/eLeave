@@ -186,7 +186,9 @@ require_once('../partials/head.php');
                                                             $users_sql = mysqli_query(
                                                                 $mysqli,
                                                                 "SELECT * FROM users u
-                                                            INNER JOIN leave_applications la ON la.application_user_id = u.user_id"
+                                                                INNER JOIN leave_applications la 
+                                                                ON la.application_user_id = u.user_id
+                                                                WHERE application_status = 'Approved'"
                                                             );
                                                             $cnt = 1;
                                                             if (mysqli_num_rows($users_sql) > 0) {
@@ -212,15 +214,12 @@ require_once('../partials/head.php');
                                                                             <?php echo $users['application_end_date']; ?>
                                                                         </td>
                                                                         <td>
-                                                                            <a data-toggle="modal" href="#update_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-primary"><em class="fas fa-user-edit"></em> Edit</a>
-                                                                            <a data-toggle="modal" href="#password_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-warning"><em class="fas fa-user-lock"></em> Change password</a>
-                                                                            <a data-toggle="modal" href="#delete_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-danger"><em class="fas fa-trash"></em> Delete</a>
-
+                                                                            <a data-toggle="modal" href="#update_<?php echo $users['applicaton_id']; ?>" class="badge  badge-pill badge-primary"><em class="fas fa-user-edit"></em> Edit</a>
                                                                         </td>
                                                                     </tr>
                                                             <?php
                                                                     $cnt = $cnt + 1;
-                                                                    include('../modals/users.php');
+                                                                    include('../modals/applications.php');
                                                                 }
                                                             } ?>
                                                         </tbody>
@@ -243,7 +242,9 @@ require_once('../partials/head.php');
                                                             $users_sql = mysqli_query(
                                                                 $mysqli,
                                                                 "SELECT * FROM users u
-                                                            INNER JOIN leave_applications la ON la.application_user_id = u.user_id"
+                                                                INNER JOIN leave_applications la 
+                                                                ON la.application_user_id = u.user_id
+                                                                WHERE application_status = 'Declined'"
                                                             );
                                                             $cnt = 1;
                                                             if (mysqli_num_rows($users_sql) > 0) {
@@ -269,15 +270,12 @@ require_once('../partials/head.php');
                                                                             <?php echo $users['application_end_date']; ?>
                                                                         </td>
                                                                         <td>
-                                                                            <a data-toggle="modal" href="#update_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-primary"><em class="fas fa-user-edit"></em> Edit</a>
-                                                                            <a data-toggle="modal" href="#password_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-warning"><em class="fas fa-user-lock"></em> Change password</a>
-                                                                            <a data-toggle="modal" href="#delete_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-danger"><em class="fas fa-trash"></em> Delete</a>
-
+                                                                            <a data-toggle="modal" href="#delete_<?php echo $users['applicaton_id']; ?>" class="badge  badge-pill badge-danger"><em class="fas fa-trash"></em> Delete</a>
                                                                         </td>
                                                                     </tr>
                                                             <?php
                                                                     $cnt = $cnt + 1;
-                                                                    include('../modals/users.php');
+                                                                    include('../modals/applications.php');
                                                                 }
                                                             } ?>
                                                         </tbody>
@@ -330,8 +328,8 @@ require_once('../partials/head.php');
                                 <div class="card card-primary card-outline">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12">
-                                                <table class="table table-bordered text-truncate data_table" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <?php if ($_GET['category'] == 'Pending') { ?>
+                                                <table class="table table-bordered text-truncate data_table">
                                                     <thead>
                                                         <tr>
                                                             <th>Sno</th>
@@ -348,7 +346,11 @@ require_once('../partials/head.php');
                                                         $users_sql = mysqli_query(
                                                             $mysqli,
                                                             "SELECT * FROM users u
-                                                            INNER JOIN leave_applications la ON la.application_user_id = u.user_id"
+                                                                INNER JOIN leave_applications la 
+                                                                ON la.application_user_id = u.user_id
+                                                                WHERE application_status = 'Pending Approval'
+                                                                AND u.user_id = '{$_SESSION['user_id']}'
+                                                                "
                                                         );
                                                         $cnt = 1;
                                                         if (mysqli_num_rows($users_sql) > 0) {
@@ -374,45 +376,149 @@ require_once('../partials/head.php');
                                                                         <?php echo $users['application_end_date']; ?>
                                                                     </td>
                                                                     <td>
-                                                                        <a data-toggle="modal" href="#update_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-primary"><em class="fas fa-user-edit"></em> Edit</a>
-                                                                        <a data-toggle="modal" href="#password_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-warning"><em class="fas fa-user-lock"></em> Change password</a>
-                                                                        <a data-toggle="modal" href="#delete_<?php echo $users['user_id']; ?>" class="badge  badge-pill badge-danger"><em class="fas fa-trash"></em> Delete</a>
-
+                                                                        <a data-toggle="modal" href="#update_<?php echo $users['applicaton_id']; ?>" class="badge  badge-pill badge-primary"><em class="fas fa-user-edit"></em> Edit</a>
+                                                                        <a data-toggle="modal" href="#delete_<?php echo $users['applicaton_id']; ?>" class="badge  badge-pill badge-danger"><em class="fas fa-trash"></em> Delete</a>
                                                                     </td>
                                                                 </tr>
                                                         <?php
                                                                 $cnt = $cnt + 1;
-                                                                include('../modals/users.php');
+                                                                include('../modals/applications.php');
                                                             }
                                                         } ?>
                                                     </tbody>
                                                 </table>
-
-                                            </div>
+                                            <?php } else if ($_GET['category'] == 'Approved') { ?>
+                                                <table class="table table-bordered text-truncate data_table" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sno</th>
+                                                            <th>Names</th>
+                                                            <th>Email</th>
+                                                            <th>Contacts</th>
+                                                            <th>Start Date</th>
+                                                            <th>End Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $users_sql = mysqli_query(
+                                                            $mysqli,
+                                                            "SELECT * FROM users u
+                                                                INNER JOIN leave_applications la 
+                                                                ON la.application_user_id = u.user_id
+                                                                WHERE application_status = 'Approved'
+                                                                 AND u.user_id = '{$_SESSION['user_id']}'
+                                                                "
+                                                        );
+                                                        $cnt = 1;
+                                                        if (mysqli_num_rows($users_sql) > 0) {
+                                                            while ($users = mysqli_fetch_array($users_sql)) {
+                                                        ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php echo $cnt; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['user_names']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['user_email']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['user_contacts']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['application_start_date']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['application_end_date']; ?>
+                                                                    </td>
+                                                                </tr>
+                                                        <?php
+                                                                $cnt = $cnt + 1;
+                                                            }
+                                                        } ?>
+                                                    </tbody>
+                                                </table>
+                                            <?php } else { ?>
+                                                <table class="table table-bordered text-truncate data_table" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sno</th>
+                                                            <th>Names</th>
+                                                            <th>Email</th>
+                                                            <th>Contacts</th>
+                                                            <th>Start Date</th>
+                                                            <th>End Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $users_sql = mysqli_query(
+                                                            $mysqli,
+                                                            "SELECT * FROM users u
+                                                                INNER JOIN leave_applications la 
+                                                                ON la.application_user_id = u.user_id
+                                                                WHERE application_status = 'Declined'
+                                                                 AND u.user_id = '{$_SESSION['user_id']}'
+                                                                "
+                                                        );
+                                                        $cnt = 1;
+                                                        if (mysqli_num_rows($users_sql) > 0) {
+                                                            while ($users = mysqli_fetch_array($users_sql)) {
+                                                        ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php echo $cnt; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['user_names']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['user_email']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['user_contacts']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['application_start_date']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $users['application_end_date']; ?>
+                                                                    </td>
+                                                                </tr>
+                                                        <?php
+                                                                $cnt = $cnt + 1;
+                                                            }
+                                                        } ?>
+                                                    </tbody>
+                                                </table>
+                                            <?php } ?>
                                         </div>
-                                        <!-- /.row -->
                                     </div>
-
+                                    <!-- /.row -->
                                 </div>
-                                <!-- /.card -->
+
                             </div>
-                            <!-- /.col -->
+                            <!-- /.card -->
                         </div>
-                        <!-- /.row -->
+                        <!-- /.col -->
                     </div>
-                    <!--/. container-fluid -->
-                </section>
-                <!-- /.content -->
+                    <!-- /.row -->
             </div>
-        <?php  } ?>
-
-        <!-- Main Footer -->
-        <?php require_once('../partials/footer.php'); ?>
+            <!--/. container-fluid -->
+            </section>
+            <!-- /.content -->
     </div>
-    <!-- ./wrapper -->
+<?php  } ?>
 
-    <!-- REQUIRED SCRIPTS -->
-    <?php require_once('../partials/scripts.php'); ?>
+<!-- Main Footer -->
+<?php require_once('../partials/footer.php'); ?>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<?php require_once('../partials/scripts.php'); ?>
 </body>
 
 
