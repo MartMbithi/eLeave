@@ -1,0 +1,1 @@
+Store your static assets here
