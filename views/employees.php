@@ -188,7 +188,7 @@ require_once('../partials/head.php');
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-12">
                                         <label>Address</label>
                                         <div class="input-group mb-3">
                                             <input type="text" name="user_address" required class="form-control">
