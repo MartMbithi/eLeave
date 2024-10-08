@@ -77,7 +77,7 @@ require_once('../partials/head.php');
         <div class="card card-outline card-primary">
             <div class="card-body login-card-body">
                 <p class="login-box-msg text-dark">
-                    Enter your new password and confirm it
+                    Confirm Password
                 </p>
                 <form method="post">
                     <div class="input-group mb-3">

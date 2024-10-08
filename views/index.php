@@ -89,7 +89,7 @@ require_once('../partials/head.php');
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" required name="user_password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters">
+                        <input type="password" class="form-control" required name="user_password" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text text-primary">
                                 <span class="fas fa-lock"></span>
