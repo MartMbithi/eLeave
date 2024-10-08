@@ -65,7 +65,7 @@
  *
  */
 
-if ($_SESSION['user_access_level'] == 'Administrator') {
+if ($_SESSION['user_access_level'] == 'Admin') {
 
     /* All Staffs */
     $query = "SELECT COUNT(*) FROM users";
